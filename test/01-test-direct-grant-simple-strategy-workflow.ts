@@ -2,7 +2,6 @@ import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 
 import { moveTime } from '../utils/functions/move-time'
 
-import { assert, expect } from 'chai'
 import {
 	BaseContract,
 	BytesLike,
@@ -107,9 +106,6 @@ describe('Cuadratic Sciencie Flow', async function () {
 	]
 	const metadataStructTypes: string[] = ['uint256', 'string']
 	const allocateStructTypes: string[] = ['address', 'uint256']
-
-	const releaseTime = new Date('2025-01-01T12:00:00Z')
-	const releaseTimeTimestamp = Math.floor(releaseTime.getTime() / 1000)
 
 	const reviewThresholdTime = new Date('2025-01-10T12:00:00Z')
 	const reviewThresholdTimeTimestamp = Math.floor(

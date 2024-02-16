@@ -10,6 +10,7 @@
 		"clear": "rm -rf ./artifacts ./cache ./typechain-types ./deployments",
 		"compile": "hardhat compile",
 		"deploy": "hardhat deploy",
+		"deploy:local": "hardhat run --network localhost scripts/deploy.ts",
 		"deploy:mumbai": "hardhat deploy --network mumbai --tags mumbai",
 		"format": "prettier --write \"./**/*.{js,jsx,ts,tsx,sol}\"",
 		"test": "REPORT_GAS=true hardhat test",

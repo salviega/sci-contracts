@@ -7,12 +7,14 @@
 # Hardhat and Solidity Development
 # ==============================================
 .notes.md
+.openzeppelin
 artifacts
 cache
 coverage
 coverage.json
 deployments
 gas-report.txt
+admin
 node_modules
 typechain
 typechain-types
@@ -99,4 +101,4 @@ contracts/test/fuzzing/crytic-export
 # ==============================================
 # Miscellaneous
 # ==============================================
-admin.json
+

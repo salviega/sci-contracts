@@ -91,6 +91,7 @@ const ACCOUNTS: string[] = [
 ]
 
 const GAS: number = 30000000 // gas limit (max 30000000)
+const GAS_PRICE: number = 10000000000
 
 const SOLC_SETTINGS = {
 	optimizer: {
@@ -116,12 +117,14 @@ const config: CustomHardhatConfig = {
 			accounts: ACCOUNTS,
 			chainId: 80001,
 			gas: GAS,
+			gasPrice: GAS_PRICE,
 			url: POLYGON_MUMBAI_RPC_URL || ''
 		},
 		bsctestnet: {
 			chainId: 97,
 			accounts: ACCOUNTS,
 			gas: GAS,
+			gasPrice: GAS_PRICE,
 			url: BSC_TESTNET_RPC_URL || ''
 		}
 	},

@@ -95,3 +95,8 @@ lint/tmp/
 # lint/reports/
 gas-report.txt
 contracts/test/fuzzing/crytic-export
+
+# ==============================================
+# Miscellaneous
+# ==============================================
+admin.json

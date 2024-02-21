@@ -1,5 +1,6 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 
+import { addMinutesToDate, toTimestamp } from '../utils/functions'
 import { moveTime } from '../utils/functions/move-time'
 
 import {
@@ -107,29 +108,22 @@ describe('Cuadratic Sciencie Flow', async function () {
 	const metadataStructTypes: string[] = ['uint256', 'string']
 	const allocateStructTypes: string[] = ['address', 'uint256']
 
-	const reviewThresholdTime = new Date('2025-01-10T12:00:00Z')
-	const reviewThresholdTimeTimestamp = Math.floor(
-		reviewThresholdTime.getTime() / 1000
-	)
+	const nowTime: Date = new Date()
 
-	const registrationStartTime = new Date('2025-01-15T12:00:00Z')
-	const registrationStartTimeTimestamp = Math.floor(
-		registrationStartTime.getTime() / 1000
+	const reviewThresholdTimestamp: number = toTimestamp(
+		addMinutesToDate(nowTime, 0).toISOString()
 	)
-
-	const registrationEndTime = new Date('2025-01-20T12:00:00Z')
-	const registrationEndTimeTimestamp = Math.floor(
-		registrationEndTime.getTime() / 1000
+	const registrationStartTimestamp: number = toTimestamp(
+		addMinutesToDate(nowTime, 30).toISOString()
 	)
-
-	const allocationStartTime = new Date('2025-01-25T12:00:00Z')
-	const allocationStartTimeTimestamp = Math.floor(
-		allocationStartTime.getTime() / 1000
+	const registrationEndTimestamp: number = toTimestamp(
+		addMinutesToDate(nowTime, 60).toISOString()
 	)
-
-	const allocationEndTime = new Date('2025-01-30T12:00:00Z')
-	const allocationEndTimeTimestamp = Math.floor(
-		allocationEndTime.getTime() / 1000
+	const allocationStartTimestamp: number = toTimestamp(
+		addMinutesToDate(nowTime, 90).toISOString()
+	)
+	const allocationEndTimestamp: number = toTimestamp(
+		addMinutesToDate(nowTime, 120).toISOString()
 	)
 
 	beforeEach(async function () {
@@ -199,11 +193,11 @@ describe('Cuadratic Sciencie Flow', async function () {
 		const alicePoolInitStrategyDataObject: InitializeData = {
 			registryGating: false,
 			metadataRequired: true,
-			reviewThreshold: reviewThresholdTimeTimestamp,
-			registrationStartTime: registrationStartTimeTimestamp,
-			registrationEndTime: registrationEndTimeTimestamp,
-			allocationStartTime: allocationStartTimeTimestamp,
-			allocationEndTime: allocationEndTimeTimestamp
+			reviewThreshold: reviewThresholdTimestamp,
+			registrationStartTime: registrationStartTimestamp,
+			registrationEndTime: registrationEndTimestamp,
+			allocationStartTime: allocationStartTimestamp,
+			allocationEndTime: allocationEndTimestamp
 		}
 
 		const aliceInitStrategyDataValues: any[] = [
@@ -444,7 +438,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 		}
 
 		let currentTime = currentBlock.timestamp
-		let timeToMoveForward = registrationStartTimeTimestamp - currentTime
+		let timeToMoveForward = registrationStartTimestamp - currentTime
 		timeToMoveForward += 60
 		await moveTime(timeToMoveForward)
 
@@ -469,6 +463,9 @@ describe('Cuadratic Sciencie Flow', async function () {
 		event = events[events.length - 1]
 
 		bobRecipientId = event.args.recipientId
+
+		console.log('bobRecipientId', bobRecipientId)
+		console.log('bobAddress', bob.address)
 
 		const bobRecipientDto: any[] = await aliceStrategyContract.getRecipient(
 			bobRecipientId
@@ -553,7 +550,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 		}
 
 		currentTime = currentBlock.timestamp
-		timeToMoveForward = allocationStartTimeTimestamp - currentTime
+		timeToMoveForward = allocationStartTimestamp - currentTime
 		timeToMoveForward += 60
 		await moveTime(timeToMoveForward)
 
@@ -616,7 +613,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 		}
 
 		currentTime = currentBlock.timestamp
-		timeToMoveForward = allocationEndTimeTimestamp - currentTime
+		timeToMoveForward = allocationEndTimestamp - currentTime
 		timeToMoveForward += 60
 		await moveTime(timeToMoveForward)
 

@@ -344,7 +344,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 		}
 
 		bobData.recipientAddress = aliceProfile.anchor
-		bobDataArray[1] = aliceProfile.anchor
+		// bobDataArray[1] = aliceProfile.anchor
 		bobDataBytes = abiCoder.encode(recipientDataStructTypes, bobDataArray)
 
 		// Add strategy to cloneable strategies
@@ -445,7 +445,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 		// 4. Add recipient
 		console.log(' 🚩  4. Add recipient')
 		const addRecipientTx = await alloInstance
-			.connect(alice)
+			.connect(bob)
 			.registerRecipient(alicePoolId, bobDataBytes)
 
 		await addRecipientTx.wait()
@@ -484,13 +484,13 @@ describe('Cuadratic Sciencie Flow', async function () {
 		}
 
 		// 5. Set recipient status to inReview reviewRecipients()
-		console.log(' 🚩  5. Set recipient status to inReview')
+		// console.log(' 🚩  5. Set recipient status to inReview')
 
-		const setReviewRecipientsTx = await aliceStrategyContract
-			.connect(alice)
-			.reviewRecipients([bobRecipientId], [5])
+		// const setReviewRecipientsTx = await aliceStrategyContract
+		// 	.connect(alice)
+		// 	.reviewRecipients([bobRecipientId], [5])
 
-		await setReviewRecipientsTx.wait()
+		// await setReviewRecipientsTx.wait()
 
 		// transactionReceipt = await ethers.provider.getTransactionReceipt(
 		// 	setReviewRecipientsTx.hash

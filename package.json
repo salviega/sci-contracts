@@ -4,6 +4,7 @@
 	"private": true,
 	"license": "MIT",
 	"scripts": {
+		"addMembers:bsctestnet": "hardhat run --network bsctestnet scripts/addMembers.ts",
 		"coverage": "yarn build && hardhat coverage --temp artifacts --network coverage",
 		"build": "yarn clear && yarn compile",
 		"chain": "hardhat node",

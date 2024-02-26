@@ -55,7 +55,9 @@ function dtoToProfile(dto: any): Profile {
 }
 
 async function main() {
-	const adminJson = JSON.parse(fs.readFileSync('admin.json').toString())
+	const adminJson = JSON.parse(
+		fs.readFileSync('admin/bsctestnet/admin.json').toString()
+	)
 	adminJson.profile = {}
 
 	const signers = await ethers.getSigners()

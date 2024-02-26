@@ -142,7 +142,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 
 	it('Happy workflow', async () => {
 		// Arrange
-		const { admin, alice, bob, kyle } = accounts
+		const { alice, bob, kyle } = accounts
 		const {
 			daiMock,
 			registryInstance,
@@ -171,24 +171,6 @@ describe('Cuadratic Sciencie Flow', async function () {
 		}
 
 		const alicePoolManagers: string[] = []
-
-		const aliceMilestone1: Milestone = {
-			amountPercentage: toDecimal(0.5),
-			metadata: {
-				protocol: BigInt(1),
-				pointer: 'ipfs://QmQmQmQmQmQmQmQmQmQmQmQmQm'
-			},
-			status: BigInt(0)
-		}
-
-		const aliceMilestone2: Milestone = {
-			amountPercentage: toDecimal(0.5),
-			metadata: {
-				protocol: BigInt(1),
-				pointer: 'ipfs://QmQmQmQmQmQmQmQmQmQmQmQmQm'
-			},
-			status: BigInt(0)
-		}
 
 		const alicePoolInitStrategyDataObject: InitializeData = {
 			registryGating: false,
@@ -236,44 +218,6 @@ describe('Cuadratic Sciencie Flow', async function () {
 		let bobDataBytes: BytesLike = abiCoder.encode(
 			recipientDataStructTypes,
 			bobDataArray
-		)
-
-		const bobMilestone1: Milestone = {
-			amountPercentage: toDecimal(0.5),
-			metadata: {
-				protocol: BigInt(1),
-				pointer: 'ipfs://QmQmQmQmQmQmQmQmQmQmQmQmQm'
-			},
-			status: BigInt(0)
-		}
-
-		const bobMilestone1Array: any[] = [
-			bobMilestone1.metadata.protocol,
-			bobMilestone1.metadata.pointer
-		]
-
-		const bobMilestone1Bytes: BytesLike = abiCoder.encode(
-			metadataStructTypes,
-			bobMilestone1Array
-		)
-
-		const bobMilestone2: Milestone = {
-			amountPercentage: toDecimal(0.5),
-			metadata: {
-				protocol: BigInt(1),
-				pointer: 'ipfs://QmQmQmQmQmQmQmQmQmQmQmQmQm'
-			},
-			status: BigInt(0)
-		}
-
-		const bobMilestone2Array: any[] = [
-			bobMilestone2.metadata.protocol,
-			bobMilestone2.metadata.pointer
-		]
-
-		const bobMilestone2Bytes: BytesLike = abiCoder.encode(
-			metadataStructTypes,
-			bobMilestone2Array
 		)
 
 		let currentBlock: any
@@ -464,9 +408,6 @@ describe('Cuadratic Sciencie Flow', async function () {
 
 		bobRecipientId = event.args.recipientId
 
-		console.log('bobRecipientId', bobRecipientId)
-		console.log('bobAddress', bob.address)
-
 		const bobRecipientDto: any[] = await aliceStrategyContract.getRecipient(
 			bobRecipientId
 		)
@@ -556,7 +497,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 
 		const voiceCredits: number = toNumber(poolFundedAmount)
 
-		const kyleAllocateDataArray: any[] = [bobRecipientId, voiceCredits]
+		const kyleAllocateDataArray: any[] = [bobRecipientId, 1]
 
 		const kyleAllocateDataBytes: BytesLike = abiCoder.encode(
 			allocateStructTypes,
@@ -581,7 +522,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 
 		event = events[events.length - 1]
 
-		const AllocatedVotes2: bigint = event.args.votes
+		const allocatedVotes: bigint = event.args.votes
 
 		const allocateFundsTx2 = await alloInstance
 			.connect(kyle)
@@ -601,7 +542,7 @@ describe('Cuadratic Sciencie Flow', async function () {
 
 		event = events[events.length - 1]
 
-		const AllocatedVotes: bigint = event.args.votes
+		const allocatedVotes2: bigint = event.args.votes
 
 		// 8. Distribute
 		console.log(' 🚩  8. Distribute funds')

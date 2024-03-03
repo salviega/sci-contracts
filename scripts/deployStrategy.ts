@@ -1,6 +1,7 @@
 import verify from '../helper-functions'
 
 import { ContractFactory } from 'ethers'
+import { ethers } from 'hardhat'
 
 async function main() {
 	await deployContracts()

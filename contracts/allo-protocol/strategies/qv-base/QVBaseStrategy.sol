@@ -165,6 +165,7 @@ abstract contract QVBaseStrategy is BaseStrategy {
 		Status recipientStatus;
 		// slot 2
 		uint256 applicationId;
+		uint256 amountDistributed;
 	}
 
 	/// @notice The details of the allocator
@@ -577,6 +578,7 @@ abstract contract QVBaseStrategy is BaseStrategy {
 
 			PayoutSummary memory payout = _getPayout(recipientId, '');
 			uint256 amount = payout.amount;
+			recipient.amountDistributed += amount;
 
 			// if (
 			// 	paidOut[recipientId] ||

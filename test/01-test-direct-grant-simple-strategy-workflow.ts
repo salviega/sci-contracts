@@ -412,6 +412,8 @@ describe('Cuadratic Sciencie Flow', async function () {
 			bobRecipientId
 		)
 
+		console.table(bobRecipientDto)
+
 		bobRecipient = {
 			useRegistryAnchor: bobRecipientDto[0],
 			recipientAddress: bobRecipientDto[1],
@@ -586,6 +588,12 @@ describe('Cuadratic Sciencie Flow', async function () {
 				aliceStrategyContractBalanceAfter
 			)
 		})
+
+		const _bobRecipientDto: any[] = await aliceStrategyContract.getRecipient(
+			bobRecipientId
+		)
+
+		console.table(_bobRecipientDto)
 	})
 })
 
